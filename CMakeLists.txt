@@ -14,7 +14,7 @@ endif()
 #############
 option(OPTIMIZE_FOR_NATIVE "Enable -march=native" OFF)
 option(BUILD_TESTS "Build unit tests" OFF)
-option(BUILD_PYTHON_INTERFACE "Build Python interface" ON)
+option(BUILD_PYTHON_INTERFACE "Build Python interface" OFF)
 
 ###################
 ## Build robotoc ##
@@ -29,6 +29,13 @@ find_package(Eigen3 REQUIRED)
 find_package(pinocchio REQUIRED)
 # find OpenMP
 find_package(OpenMP REQUIRED)
+# find catkin
+find_package(catkin REQUIRED)
+# catkin
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  DEPENDS eigen3 pinocchio)
 # build robotoc 
 file(GLOB_RECURSE ${PROJECT_NAME}_SOURCES src/*.cpp)
 file(GLOB_RECURSE ${PROJECT_NAME}_HEADERS include/${PROJECT_NAME}/*.h*)
